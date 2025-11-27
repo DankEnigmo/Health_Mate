@@ -5,7 +5,6 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.8+-brightgreen.svg)
 ![React](https://img.shields.io/badge/react-18.3+-61dafb.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 **A comprehensive healthcare monitoring solution combining real-time fall detection with medication management and caregiver coordination.**
 
@@ -28,9 +27,7 @@
 - [Project Structure](#-project-structure)
 - [API Documentation](#-api-documentation)
 - [Technologies Used](#-technologies-used)
-- [Troubleshooting](#-troubleshooting)
-- [Contributing](#-contributing)
-- [License](#-license)
+
 
 ---
 
