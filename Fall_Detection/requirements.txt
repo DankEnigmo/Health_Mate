@@ -1,0 +1,12 @@
+matplotlib
+torch
+torchvision
+opencv-python
+xmltodict
+fastapi
+uvicorn[standard]
+python-multipart
+websockets
+supabase
+python-dotenv
+scipy

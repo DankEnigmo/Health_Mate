@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    /* New Teal Palette */
+    --app-teal-50: 175 100% 98%;
+    --app-teal-100: 175 100% 95%;
+    --app-teal-200: 175 100% 90%;
+    --app-teal-300: 175 100% 80%;
+    --app-teal-400: 175 100% 70%;
+    --app-teal-500: 175 100% 60%;
+    --app-teal-600: 175 100% 50%;
+    --app-teal-700: 175 100% 40%;
+    --app-teal-800: 175 100% 30%;
+    --app-teal-900: 175 100% 20%;
+
+    --primary: var(--app-teal-700); /* One shade darker */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 215 20.2% 65.1%;
+
+    --radius: 0.5rem;
+
+    /* Sidebar specific colors - Light Mode */
+    --sidebar-background: 0 0% 100%; /* White */
+    --sidebar-foreground: 222.2 84% 4.9%; /* Dark blue-gray */
+    --sidebar-primary: var(--app-teal-800); /* Darker to match new primary */
+    --sidebar-primary-foreground: 0 0% 100%; /* White text */
+    --sidebar-accent: var(--app-teal-100); /* Light teal for highlight */
+    --sidebar-accent-foreground: var(--app-teal-900); /* Very dark teal text on accent */
+    --sidebar-border: 214.3 31.8% 91.4%; /* Light border */
+    --sidebar-ring: 215 20.2% 65.1%; /* Ring color */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%; /* Dark blue-gray */
+    --foreground: 210 40% 98%; /* Off-white */
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --primary: var(--app-teal-500); /* One shade darker */
+    --primary-foreground: 222.2 47.4% 11.2%; /* Dark blue-gray text */
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 217.2 32.6% 17.5%;
+
+    /* Sidebar specific colors - Dark Mode */
+    --sidebar-background: 222.2 84% 4.9%; /* Dark blue-gray */
+    --sidebar-foreground: 210 40% 98%; /* Off-white */
+    --sidebar-primary: var(--app-teal-400); /* Darker to match new primary */
+    --sidebar-primary-foreground: 222.2 47.4% 11.2%; /* Dark blue-gray text */
+    --sidebar-accent: var(--app-teal-800); /* Darker teal for highlight */
+    --sidebar-accent-foreground: 0 0% 100%; /* White text on accent */
+    --sidebar-border: 217.2 32.6% 17.5%; /* Dark border */
+    --sidebar-ring: 217.2 32.6% 17.5%; /* Ring color */
+  }
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Sansation", sans-serif; /* Set Sansation as default font */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-color: hsl(var(--background)); /* Ensure body background respects theme */
+  color: hsl(var(--foreground)); /* Ensure body text color respects theme */
+}
+
+/* Sansation font classes */
+.sansation-light {
+  font-family: "Sansation", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.sansation-regular {
+  font-family: "Sansation", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sansation-bold {
+  font-family: "Sansation", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sansation-light-italic {
+  font-family: "Sansation", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.sansation-regular-italic {
+  font-family: "Sansation", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.sansation-bold-italic {
+  font-family: "Sansation", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Rubik Doodle Shadow font class */
+.rubik-doodle-shadow-regular {
+  font-family: "Rubik Doodle Shadow", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
