@@ -27,7 +27,7 @@ from .medication_scheduler import MedicationScheduler
 from . import network
 from . import decoder
 
-# Configure logging
+# Configure logging FIRST
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -38,6 +38,21 @@ logging.basicConfig(
 )
 
 LOG = logging.getLogger(__name__)
+
+# Import gaze tracking (with fallback if not available)
+try:
+    import os
+    # Add gaze_tracking to path
+    gaze_tracking_path = os.path.join(os.path.dirname(__file__), '..', 'gaze_tracking')
+    if os.path.exists(gaze_tracking_path):
+        sys.path.insert(0, gaze_tracking_path)
+    from gaze_api import gaze_tracking_websocket
+    GAZE_TRACKING_AVAILABLE = True
+    LOG.info("Gaze tracking module loaded successfully")
+except ImportError as e:
+    LOG.warning(f"Gaze tracking not available: {e}")
+    GAZE_TRACKING_AVAILABLE = False
+    gaze_tracking_websocket = None
 
 # Global state
 config: Optional[FallDetectionConfig] = None
@@ -351,6 +366,18 @@ async def get_config():
             "port": config.port
         }
     )
+
+
+@app.websocket("/ws/gaze-tracking")
+async def websocket_gaze_endpoint(websocket: WebSocket):
+    """WebSocket endpoint for gaze tracking."""
+    if not GAZE_TRACKING_AVAILABLE or gaze_tracking_websocket is None:
+        await websocket.close(code=1011, reason="Gaze tracking not available")
+        LOG.warning("Gaze tracking WebSocket request rejected - module not available")
+        return
+    
+    LOG.info("Gaze tracking WebSocket connection request received")
+    await gaze_tracking_websocket(websocket)
 
 
 if __name__ == "__main__":

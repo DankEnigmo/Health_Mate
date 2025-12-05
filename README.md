@@ -115,7 +115,7 @@ HealthMate is a full-stack healthcare monitoring application designed for elderl
 - **Medication Scheduler** - Automated reminder system
 - **WebSocket Manager** - Real-time communication
 
-#### Frontend (`HealthMate/`)
+#### Frontend (`HM_Frontend/`)
 - **React + TypeScript** - Type-safe component architecture
 - **Vite** - Lightning-fast build tool
 - **React Router** - Client-side routing with protected routes
@@ -155,8 +155,8 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/healthmate.git
-cd healthmate
+git clone https://github.com/DankEnigmo/Health_Mate.git
+cd Health_Mate
 ```
 
 ### 2. Backend Setup
@@ -179,7 +179,7 @@ pip install -r Fall_Detection/requirements.txt
 
 ```bash
 # Navigate to frontend directory
-cd HealthMate
+cd HM_Frontend
 
 # Install dependencies
 pnpm install
@@ -228,10 +228,10 @@ PORT=8000                         # Server port
 
 1. Copy the environment template:
 ```bash
-cp HealthMate/.env.example HealthMate/.env
+cp HM_Frontend/.env.example HM_Frontend/.env
 ```
 
-2. Edit `HealthMate/.env` with your settings:
+2. Edit `HM_Frontend/.env` with your settings:
 
 ```env
 # Supabase Configuration
@@ -250,7 +250,7 @@ VITE_BACKEND_API_URL=http://localhost:8000
 
 ```bash
 # Using Supabase CLI
-cd HealthMate/supabase
+cd HM_Frontend/supabase
 supabase db push
 
 # Or manually apply migrations in the Supabase dashboard
@@ -286,7 +286,7 @@ The backend will be available at `http://localhost:8000`
 **Terminal 2 - Frontend:**
 ```bash
 # Run frontend development server
-cd HealthMate
+cd HM_Frontend
 pnpm dev
 ```
 
@@ -311,7 +311,7 @@ uvicorn api_server:app --host 0.0.0.0 --port 8000 --workers 4
 #### Frontend
 
 ```bash
-cd HealthMate
+cd HM_Frontend
 pnpm build
 pnpm preview
 ```
@@ -339,7 +339,7 @@ pytest tests/ --cov=. --cov-report=html
 ### Frontend Tests
 
 ```bash
-cd HealthMate
+cd HM_Frontend
 
 # Run tests
 pnpm test
@@ -359,7 +359,7 @@ pnpm test:run
 ## 📁 Project Structure
 
 ```
-healthmate/
+Health_Mate/
 ├── Fall_Detection/               # Backend (Python/FastAPI)
 │   ├── api_server.py            # Main FastAPI application
 │   ├── config_manager.py        # Configuration management
@@ -381,7 +381,7 @@ healthmate/
 │   ├── transforms/             # Image transformations
 │   └── tests/                  # Backend tests
 │
-├── HealthMate/                  # Frontend (React/TypeScript)
+├── HM_Frontend/                 # Frontend (React/TypeScript)
 │   ├── src/
 │   │   ├── main.tsx            # Application entry point
 │   │   ├── App.tsx             # Root component
@@ -584,7 +584,7 @@ Once the server is running, visit:
    curl http://localhost:8000/health
    ```
 
-2. Check Vite proxy configuration in `HealthMate/vite.config.ts`
+2. Check Vite proxy configuration in `HM_Frontend/vite.config.ts`
 
 3. Verify CORS settings in `Fall_Detection/api_server.py`
 
