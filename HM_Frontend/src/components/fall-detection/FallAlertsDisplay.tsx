@@ -6,6 +6,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { useFallAlerts, FallEvent } from '@/hooks/use-fall-alerts';
+import { logger } from '@/utils/logger';
 import {
   AlertTriangle,
   BellRing,
@@ -67,7 +68,7 @@ export const FallAlertsDisplay: React.FC<FallAlertsDisplayProps> = ({
     try {
       await markAsReviewed(alertId);
     } catch (err) {
-      console.error('Failed to mark alert as reviewed:', err);
+      logger.error('Failed to mark alert as reviewed:', err);
     } finally {
       setLoadingAlertId(null);
     }
@@ -81,7 +82,7 @@ export const FallAlertsDisplay: React.FC<FallAlertsDisplayProps> = ({
     try {
       await markAsResolved(alertId);
     } catch (err) {
-      console.error('Failed to mark alert as resolved:', err);
+      logger.error('Failed to mark alert as resolved:', err);
     } finally {
       setLoadingAlertId(null);
     }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
+import { logger } from '@/utils/logger';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BellRing, User, Clock, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -48,7 +49,7 @@ const EmergencyAlertsDisplay: React.FC = () => {
       .order('created_at', { ascending: false });
 
     if (error) {
-          console.error("Error fetching emergency alerts:", error);
+          logger.error("Error fetching emergency alerts:", error);
           showError("Failed to load emergency alerts.");
         } else {
           // FIX STARTS HERE: Transform the raw data to match your Interface
@@ -90,7 +91,7 @@ const EmergencyAlertsDisplay: React.FC = () => {
             .single()
             .then(({ data: profileData, error: profileError }) => {
               if (profileError) {
-                console.error("Error fetching profile for new alert:", profileError);
+                logger.error("Error fetching profile for new alert:", profileError);
               } else {
                 setAlerts((prevAlerts) => [{ ...newAlert, profiles: profileData || undefined }, ...prevAlerts]);
                 showError(`New Emergency Alert from ${profileData?.first_name || 'your patient'}!`);
@@ -125,7 +126,7 @@ const EmergencyAlertsDisplay: React.FC = () => {
       .eq('id', alertId);
 
     if (error) {
-      console.error("Error marking alert as resolved:", error);
+      logger.error("Error marking alert as resolved:", error);
       showError("Failed to mark alert as resolved.");
     } else {
       showSuccess("Alert marked as resolved.");

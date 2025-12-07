@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { logger } from '@/utils/logger';
 import {
   Dialog,
   DialogContent,
@@ -145,7 +146,7 @@ export function MedicineScheduleDialog({
       await onSave(medData);
       handleClose();
     } catch (error) {
-      console.error('Error saving medication schedule:', error);
+      logger.error('Error saving medication schedule:', error);
     } finally {
       setIsSubmitting(false);
     }

@@ -4,7 +4,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-react";
 import { showSuccess, showError } from "@/utils/toast";
-import { useSupabase } from "@/components/SessionContextProvider"; // Re-added useSupabase import
+import { useSupabase } from "@/components/SessionContextProvider";
+import { logger } from '@/utils/logger';
 
 const EmergencyButton: React.FC = () => {
   const { session } = useSupabase(); // Re-added session check
@@ -14,7 +15,7 @@ const EmergencyButton: React.FC = () => {
       showError("You must be logged in to send an emergency alert.");
       return;
     }
-    console.log("EmergencyButton: Sending alert with access token:", session.access_token ? "present" : "missing");
+    logger.log("EmergencyButton: Sending alert with access token:", session.access_token ? "present" : "missing");
     try {
       const response = await fetch('https://ruqdkozfcnevgxuaitkk.supabase.co/functions/v1/send-emergency-alert', {
         method: 'POST',
@@ -32,7 +33,7 @@ const EmergencyButton: React.FC = () => {
         showError(result.error || "Failed to send emergency alert.");
       }
     } catch (error) {
-      console.error("Error sending emergency alert:", error);
+      logger.error("Error sending emergency alert:", error);
       showError("An unexpected error occurred while sending the alert.");
     }
   };

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { logger } from '@/utils/logger';
 import { MedicationLog, MedicationWithStatus, AdherenceStats, MedicationSchedule } from '@/types/medication';
 import { toast } from 'sonner';
 import { startOfDay, endOfDay, subDays, parseISO, format, isAfter, isBefore } from 'date-fns';
@@ -74,7 +75,7 @@ export function useMedicationLogs(
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch medication logs';
       setError(errorMessage);
-      console.error('Error fetching medication logs:', err);
+      logger.error('Error fetching medication logs:', err);
     } finally {
       setLoading(false);
     }
@@ -142,7 +143,7 @@ export function useMedicationLogs(
       setTodaysMedications(medicationsWithStatus);
 
     } catch (err) {
-      console.error('Error fetching today\'s medications:', err);
+      logger.error('Error fetching today\'s medications:', err);
     }
   }, [patientId]);
 

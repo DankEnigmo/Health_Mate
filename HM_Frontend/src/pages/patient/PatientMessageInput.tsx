@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
+import { logger } from '@/utils/logger';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -98,7 +99,7 @@ const PatientMessageInput: React.FC = () => {
           startCalibration();
         }
       } catch (error) {
-        console.error("Failed to enable gaze tracking:", error);
+        logger.error("Failed to enable gaze tracking:", error);
       }
     }
   }, [

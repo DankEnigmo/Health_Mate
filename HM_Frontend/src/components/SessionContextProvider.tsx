@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { Session, SupabaseClient, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { logger } from '@/utils/logger';
 
 interface Profile {
   id: string;
@@ -37,7 +38,7 @@ export const SessionContextProvider: React.FC<{ children: React.ReactNode }> = (
       .single();
 
     if (error && error.code !== 'PGRST116') { // PGRST116 means no rows found
-      console.error("Error fetching profile:", error);
+      logger.error("Error fetching profile:", error);
       setProfile(null);
       return null;
     } else if (profileData) {

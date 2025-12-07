@@ -8,6 +8,7 @@ import { User, Stethoscope } from "lucide-react";
 import { useSupabase } from "@/components/SessionContextProvider";
 import { supabase } from "@/integrations/supabase/client";
 import { showSuccess, showError } from "@/utils/toast";
+import { logger } from '@/utils/logger';
 
 const RoleSelectionPage: React.FC = () => {
   const { session, profile, loading, refreshProfile } = useSupabase();
@@ -55,7 +56,7 @@ const RoleSelectionPage: React.FC = () => {
       await refreshProfile(); // Refresh the profile in context
       // The useEffect will now handle the redirection after profile update
     } catch (error: any) {
-      console.error("Error setting role:", error);
+      logger.error("Error setting role:", error);
       showError(`Failed to set role: ${error.message}`);
     }
   };

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { logger } from '@/utils/logger';
 
 /**
  * Fall Event interface matching the database schema
@@ -103,7 +104,7 @@ export function useFallAlerts(
         .limit(maxAlerts);
       
       if (fetchError) {
-        console.error('Error fetching fall alerts:', fetchError);
+        logger.error('Error fetching fall alerts:', fetchError);
         setError('Failed to fetch fall alerts from database');
         return;
       }
@@ -112,7 +113,7 @@ export function useFallAlerts(
         setAlerts(data as FallEvent[]);
       }
     } catch (err) {
-      console.error('Error fetching fall alerts:', err);
+      logger.error('Error fetching fall alerts:', err);
       setError('Failed to fetch fall alerts');
     }
   }, [patientId, maxAlerts]);
@@ -136,13 +137,13 @@ export function useFallAlerts(
         .single();
       
       if (insertError) {
-        console.error('Error storing fall alert:', insertError);
+        logger.error('Error storing fall alert:', insertError);
         return null;
       }
       
       return data as FallEvent;
     } catch (err) {
-      console.error('Error storing fall alert:', err);
+      logger.error('Error storing fall alert:', err);
       return null;
     }
   }, []);
@@ -166,7 +167,7 @@ export function useFallAlerts(
       const ws = new WebSocket(`${backendWsUrl}/api/ws/alerts?patient_id=${patientId}`);
       
       ws.onopen = () => {
-        console.log('WebSocket connected');
+        logger.log('WebSocket connected');
         setIsConnected(true);
         setError(null);
         setReconnectAttempt(0);
@@ -191,18 +192,18 @@ export function useFallAlerts(
             }
           }
         } catch (err) {
-          console.error('Error processing WebSocket message:', err);
+          logger.error('Error processing WebSocket message:', err);
         }
       };
       
       ws.onerror = (event) => {
-        console.error('WebSocket error:', event);
+        logger.error('WebSocket error:', event);
         setError('WebSocket connection error');
         isReconnectingRef.current = false;
       };
       
       ws.onclose = () => {
-        console.log('WebSocket disconnected');
+        logger.log('WebSocket disconnected');
         setIsConnected(false);
         isReconnectingRef.current = false;
         
@@ -220,7 +221,7 @@ export function useFallAlerts(
       
       wsRef.current = ws;
     } catch (err) {
-      console.error('Error creating WebSocket:', err);
+      logger.error('Error creating WebSocket:', err);
       setError('Failed to create WebSocket connection');
       isReconnectingRef.current = false;
     }
@@ -237,7 +238,7 @@ export function useFallAlerts(
         .eq('id', alertId);
       
       if (updateError) {
-        console.error('Error marking alert as reviewed:', updateError);
+        logger.error('Error marking alert as reviewed:', updateError);
         throw new Error('Failed to mark alert as reviewed');
       }
       
@@ -250,7 +251,7 @@ export function useFallAlerts(
         )
       );
     } catch (err) {
-      console.error('Error marking alert as reviewed:', err);
+      logger.error('Error marking alert as reviewed:', err);
       throw err;
     }
   }, []);
@@ -266,7 +267,7 @@ export function useFallAlerts(
         .eq('id', alertId);
       
       if (updateError) {
-        console.error('Error marking alert as resolved:', updateError);
+        logger.error('Error marking alert as resolved:', updateError);
         throw new Error('Failed to mark alert as resolved');
       }
       
@@ -279,7 +280,7 @@ export function useFallAlerts(
         )
       );
     } catch (err) {
-      console.error('Error marking alert as resolved:', err);
+      logger.error('Error marking alert as resolved:', err);
       throw err;
     }
   }, []);

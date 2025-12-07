@@ -1,4 +1,5 @@
 import { useMedicationLogs } from '@/hooks/use-medication-logs';
+import { logger } from '@/utils/logger';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +22,7 @@ export function MedicineChecklist({ patientId, date = new Date() }: MedicineChec
       try {
         await logMedication(medicationId, scheduledTime);
       } catch (err) {
-        console.error('Failed to log medication:', err);
+        logger.error('Failed to log medication:', err);
       }
     }
   };

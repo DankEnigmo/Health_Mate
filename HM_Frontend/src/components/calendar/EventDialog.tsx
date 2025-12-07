@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { logger } from '@/utils/logger';
 import {
   Dialog,
   DialogContent,
@@ -124,7 +125,7 @@ export function EventDialog({
       await onSave(eventData);
       handleClose();
     } catch (error) {
-      console.error('Error saving event:', error);
+      logger.error('Error saving event:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -139,7 +140,7 @@ export function EventDialog({
         await onDelete(event.id);
         handleClose();
       } catch (error) {
-        console.error('Error deleting event:', error);
+        logger.error('Error deleting event:', error);
       } finally {
         setIsSubmitting(false);
       }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { logger } from '@/utils/logger';
 import { Card } from "@/components/ui/card";
 import { useCaregiverPatient } from "@/hooks/use-caregiver-patient";
 import { supabase } from "@/integrations/supabase/client";
@@ -37,7 +38,7 @@ const CaregiverCalendar = () => {
           .single();
 
         if (error) {
-          console.error("Error fetching patient profile:", error);
+          logger.error("Error fetching patient profile:", error);
           showError("Failed to fetch patient profile.");
           setPatientName(null);
         } else if (data) {

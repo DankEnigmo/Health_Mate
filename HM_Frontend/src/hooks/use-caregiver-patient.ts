@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { logger } from '@/utils/logger';
 import { showError } from "@/utils/toast";
 import { useSupabase } from "@/components/SessionContextProvider"; // Re-added useSupabase import
 
@@ -46,7 +47,7 @@ export function useCaregiverPatient() {
           showError("No patient assigned to this caregiver. Please assign a patient.");
         }
       } catch (err: any) {
-        console.error("Error fetching assigned patient:", err);
+        logger.error("Error fetching assigned patient:", err);
         setError(err.message || "Failed to fetch assigned patient.");
         showError(err.message || "Failed to fetch assigned patient.");
       } finally {

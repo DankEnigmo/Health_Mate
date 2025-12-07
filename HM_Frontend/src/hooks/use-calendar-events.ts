@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { logger } from '@/utils/logger';
 import { CalendarEvent } from '@/types/calendar';
 import { toast } from 'sonner';
 
@@ -40,7 +41,7 @@ export function useCalendarEvents(patientId: string): UseCalendarEventsReturn {
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch calendar events';
       setError(errorMessage);
-      console.error('Error fetching calendar events:', err);
+      logger.error('Error fetching calendar events:', err);
     } finally {
       setLoading(false);
     }

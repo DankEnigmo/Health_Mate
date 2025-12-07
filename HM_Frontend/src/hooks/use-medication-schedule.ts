@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { logger } from '@/utils/logger';
 import { MedicationSchedule } from '@/types/medication';
 import { toast } from 'sonner';
 
@@ -41,7 +42,7 @@ export function useMedicationSchedule(patientId: string): UseMedicationScheduleR
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch medication schedules';
       setError(errorMessage);
-      console.error('Error fetching medication schedules:', err);
+      logger.error('Error fetching medication schedules:', err);
     } finally {
       setLoading(false);
     }

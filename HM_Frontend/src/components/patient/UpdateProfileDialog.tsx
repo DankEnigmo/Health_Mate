@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { logger } from '@/utils/logger';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -82,7 +83,7 @@ const UpdateProfileDialog: React.FC<UpdateProfileDialogProps> = ({ isOpen, onClo
       await refreshProfile(); // Refresh the profile in context
       onClose(); // Close the dialog
     } catch (error: any) {
-      console.error("Error updating profile:", error);
+      logger.error("Error updating profile:", error);
       showError(`Failed to update profile: ${error.message}`);
     } finally {
       setIsSubmitting(false);

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { logger } from '@/utils/logger';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CalendarDays, BellRing, MessageSquareText, User, AlertTriangle } from "lucide-react";
 import EmergencyAlertsDisplay from "@/components/caregiver/EmergencyAlertsDisplay";
@@ -36,7 +37,7 @@ const CaregiverDashboard: React.FC = () => {
           .single();
 
         if (error) {
-          console.error("Error fetching patient profile:", error);
+          logger.error("Error fetching patient profile:", error);
           showError("Failed to fetch patient profile.");
           setPatientName(null);
         } else if (data) {
@@ -68,7 +69,7 @@ const CaregiverDashboard: React.FC = () => {
           .eq('patient_id', patientId);
 
         if (totalError) {
-          console.error("Error fetching total fall count:", totalError);
+          logger.error("Error fetching total fall count:", totalError);
         }
 
         // Get new alerts (status = 'new')
@@ -79,7 +80,7 @@ const CaregiverDashboard: React.FC = () => {
           .eq('status', 'new');
 
         if (newError) {
-          console.error("Error fetching new alerts count:", newError);
+          logger.error("Error fetching new alerts count:", newError);
         }
 
         // Get today's falls
@@ -94,7 +95,7 @@ const CaregiverDashboard: React.FC = () => {
           .gte('timestamp', todayISO);
 
         if (todayError) {
-          console.error("Error fetching today's fall count:", todayError);
+          logger.error("Error fetching today's fall count:", todayError);
         }
 
         setFallStats({
@@ -103,7 +104,7 @@ const CaregiverDashboard: React.FC = () => {
           todayFalls: todayCount || 0,
         });
       } catch (err) {
-        console.error("Error fetching fall statistics:", err);
+        logger.error("Error fetching fall statistics:", err);
       }
     };
 

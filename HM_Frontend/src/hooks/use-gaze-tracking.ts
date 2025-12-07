@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { logger } from '@/utils/logger';
 
 // Types for gaze tracking
 export interface GazeCoordinates {
@@ -272,11 +273,11 @@ export function useGazeTracking(options: UseGazeTrackingOptions = {}): UseGazeTr
           break;
 
         case 'error':
-          console.error('Gaze tracking error:', data.message);
+          logger.error('Gaze tracking error:', data.message);
           break;
       }
     } catch (error) {
-      console.error('Error parsing WebSocket message:', error);
+      logger.error('Error parsing WebSocket message:', error);
     }
   }, [samplesPerCalibrationPoint]);
 
@@ -308,7 +309,7 @@ export function useGazeTracking(options: UseGazeTrackingOptions = {}): UseGazeTr
         };
 
         ws.onerror = (error) => {
-          console.error('WebSocket error:', error);
+          logger.error('WebSocket error:', error);
           setConnectionError('Failed to connect to gaze tracking server');
           setIsConnecting(false);
           reject(new Error('WebSocket connection failed'));
@@ -362,7 +363,7 @@ export function useGazeTracking(options: UseGazeTrackingOptions = {}): UseGazeTr
 
       setIsCameraActive(true);
     } catch (error) {
-      console.error('Camera error:', error);
+      logger.error('Camera error:', error);
       setCameraError(
         error instanceof Error
           ? error.message
@@ -404,7 +405,7 @@ export function useGazeTracking(options: UseGazeTrackingOptions = {}): UseGazeTr
   // Start tracking
   const startTracking = useCallback(() => {
     if (!isConnected || !isCameraActive) {
-      console.warn('Cannot start tracking: not connected or camera not active');
+      logger.warn('Cannot start tracking: not connected or camera not active');
       return;
     }
 
@@ -428,7 +429,7 @@ export function useGazeTracking(options: UseGazeTrackingOptions = {}): UseGazeTr
   // Start calibration
   const startCalibration = useCallback(() => {
     if (!isConnected || !isCameraActive) {
-      console.warn('Cannot start calibration: not connected or camera not active');
+      logger.warn('Cannot start calibration: not connected or camera not active');
       return;
     }
 

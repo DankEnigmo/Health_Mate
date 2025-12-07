@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { logger } from '@/utils/logger';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -95,7 +96,7 @@ export const FallDetectionPlayer: React.FC<FallDetectionPlayerProps> = ({
       }
     } catch (err) {
       // Silently fail - metrics are not critical
-      console.error('Failed to fetch metrics:', err);
+      logger.error('Failed to fetch metrics:', err);
     }
   };
   
